@@ -1,0 +1,23 @@
+const express = require('express')
+const authHandlerBasic = require('../middlewares/authHandlerBasic')
+
+const router = express.Router()
+
+const { crearOperador, traerOperador, updateOperador } = require('../controllers/operador')
+const { crearProspecto, traerProspecto } = require('../controllers/prospecto')
+const collaborators = require('./collaborators')
+const products = require('./products')
+const clientes = require('./clients')
+const transport = require('./transport')
+const reservation = require('./reservation')
+router.post('/operador', crearOperador)
+router.get('/operador', traerOperador)
+router.put('/operador', updateOperador)
+router.post('/prospectos', crearProspecto)
+router.post('/filtrarProspectos', traerProspecto)
+router.use(collaborators)
+router.use(authHandlerBasic, products)
+router.use(authHandlerBasic, clientes)
+router.use(authHandlerBasic, transport)
+router.use(authHandlerBasic, reservation)
+module.exports = router

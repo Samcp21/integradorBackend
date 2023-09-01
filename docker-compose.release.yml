@@ -1,0 +1,14 @@
+version: '2'
+services:
+    msa:
+        restart: always
+        image: 'ms_prospecto_genby_js:TEST_V_0.11'
+        env_file: .env.release
+        ports:
+            - '30014:3000'
+        networks:
+            - app_mysql_innout_networks
+
+networks:
+    app_mysql_innout_networks:
+        external: true

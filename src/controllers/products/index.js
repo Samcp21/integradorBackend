@@ -3,7 +3,7 @@ const { products } = require('../../database/models')
 const postProducts = async (req, res) => {
     try {
         const data = await products.create({
-          ...req.body,
+            ...req.body,
         })
         res.send(data)
     } catch (error) {
@@ -18,6 +18,7 @@ const getProducts = async (req, res) => {
                 activo: 1,
             },
         })
+        console.log('data', data)
         res.send(data)
     } catch (error) {
         console.log('error', error)
@@ -25,20 +26,19 @@ const getProducts = async (req, res) => {
 }
 const putProducts = async (req, res) => {
     try {
-      //console.log("req.body",req.body)
-      const {name,price,idTypeTours,description}=req.body
-      const body ={
-        name,
-        description,
-        idTypeTours,
-        price
-      }
-        const data = await products.update(
-            body,{
-                where: {
-                    id: req.body.id,
-                },
-            })
+        //console.log("req.body",req.body)
+        const { name, price, idTypeTours, description } = req.body
+        const body = {
+            name,
+            description,
+            idTypeTours,
+            price,
+        }
+        const data = await products.update(body, {
+            where: {
+                id: req.body.id,
+            },
+        })
         res.send(data)
     } catch (error) {
         console.log('error', error)
